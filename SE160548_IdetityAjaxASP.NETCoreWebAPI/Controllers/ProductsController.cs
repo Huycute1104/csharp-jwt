@@ -8,7 +8,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
 {
     [Route("api/products")]
     [ApiController]
-  /*  [Authorize]*/
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IUnitOfwork unitOfwork;

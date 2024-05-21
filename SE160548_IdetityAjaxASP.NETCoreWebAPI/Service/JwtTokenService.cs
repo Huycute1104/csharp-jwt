@@ -1,10 +1,13 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository.Models;
+﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository.Models;
+using Microsoft.Extensions.Configuration;
+using SE160548_IdetityAjaxASP.NETCoreWebAPI.Service;
 
-namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Service
+namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Services
 {
     public class JwtTokenService : IJwtTokenService
     {
@@ -15,26 +18,24 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Service
             _configuration = configuration;
         }
 
-        public string GenerateToken(Member member)
+        public string GenerateToken(Member user)
         {
-            var claims = new[]
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-            new Claim(JwtRegisteredClaimNames.Sub, member.Email),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
-                signingCredentials: creds);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.MemberId.ToString()),
+                    new Claim(ClaimTypes.Name, user.Email)
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                Issuer = _configuration["Jwt:Issuer"],
+                Audience = _configuration["Jwt:Audience"],
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
-
 }
