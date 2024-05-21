@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository.Models;
 using SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository.UnitOfwork;
+using SE160548_IdetityAjaxASP.NETCoreWebAPI.Service;
 
 namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.DependencyInjection
 {
@@ -16,6 +17,12 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.DependencyInjection
             services.AddScoped<IUnitOfwork, UnitOfwork>();
             return services;
         }
+        public static IServiceCollection AddJwtTokenService(this IServiceCollection services)
+        {
+            services.AddScoped<IJwtTokenService, JwtTokenService>();
+            return services;
+        }
+
 
         public static string getConnection()
         {

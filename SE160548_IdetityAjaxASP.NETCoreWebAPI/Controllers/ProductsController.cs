@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository.Models;
 using SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository.UnitOfwork;
@@ -7,6 +8,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
 {
     [Route("api/products")]
     [ApiController]
+  /*  [Authorize]*/
     public class ProductsController : ControllerBase
     {
         private readonly IUnitOfwork unitOfwork;
