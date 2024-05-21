@@ -1,3 +1,5 @@
+using SE160548_IdetityAjaxASP.NETCoreWebAPI.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +8,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+// config database
+builder.Services.AddDatabase();
+builder.Services.addUnitOfWork();
+
 
 var app = builder.Build();
 
