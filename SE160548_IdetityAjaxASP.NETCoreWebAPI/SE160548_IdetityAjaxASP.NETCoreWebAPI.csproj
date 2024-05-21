@@ -14,8 +14,4 @@
     <ProjectReference Include="..\SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository\SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>
