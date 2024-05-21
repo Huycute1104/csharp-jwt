@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
