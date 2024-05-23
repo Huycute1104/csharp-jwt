@@ -9,7 +9,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository.GenericRepository
 {
     public interface IGenericRepository<T> where T : class
     {
-        IEnumerable<T> GetAll(
+        IEnumerable<T> Get(
                 Expression<Func<T, bool>> filter = null,
                 Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                 string includeProperties = "",

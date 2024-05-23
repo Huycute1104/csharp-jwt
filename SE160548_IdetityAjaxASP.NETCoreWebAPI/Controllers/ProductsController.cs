@@ -31,7 +31,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
             Desc
         }
         [HttpGet]
-        public IActionResult GetAllProduct(
+        public IActionResult GetProduct(
     [FromQuery] int pageIndex = 1,
     [FromQuery] int pageSize = 10,
     [FromQuery] string? searchProductName = null,
@@ -49,7 +49,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
                     return BadRequest($"Invalid sortBy value. Allowed values are: {string.Join(", ", sortableFields)}");
                 }
 
-                var products = unitOfwork.ProductRepo.GetAll(
+                var products = unitOfwork.ProductRepo.Get(
                     filter: p => (string.IsNullOrEmpty(searchProductName) || p.ProductName.Contains(searchProductName)) &&
                                  (!minPrice.HasValue || p.UnitPrice >= minPrice.Value) &&
                                  (!maxPrice.HasValue || p.UnitPrice <= maxPrice.Value) &&
@@ -104,7 +104,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
         {
             try
             {
-                var productlast = unitOfwork.ProductRepo.GetAll().LastOrDefault();
+                var productlast = unitOfwork.ProductRepo.Get().LastOrDefault();
                 Product create = new Product();
                 create.ProductId = productlast.ProductId + 1;
                 create.ProductName = product.ProductName;

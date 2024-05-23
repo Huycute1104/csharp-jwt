@@ -23,7 +23,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginModel model)
         {
-            var user = _unitOfWork.MemberRepo.GetAll()
+            var user = _unitOfWork.MemberRepo.Get()
                                .FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
 
             if (user == null)
