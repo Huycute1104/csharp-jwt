@@ -90,7 +90,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
                 Product product = unitOfwork.ProductRepo.GetById(id);
                 if (product == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = "Product Not Found" });
                 }
                 return Ok(product);
             }
@@ -130,7 +130,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
                 Product product = unitOfwork.ProductRepo.GetById(id);
                 if (product == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = "Product Not Found" });
                 }
                 unitOfwork.ProductRepo.Delete(product);
                 return Ok();
@@ -148,7 +148,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
                 Product product = unitOfwork.ProductRepo.GetById(id);
                 if (product == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = "Product Not Found" });
                 }
                 product.UnitPrice = model.UnitPrice;
                 product.CategoryId = model.CategoryId;

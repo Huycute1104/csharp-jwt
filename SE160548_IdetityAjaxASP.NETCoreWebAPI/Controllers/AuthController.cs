@@ -28,7 +28,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
 
             if (user == null)
             {
-                return Unauthorized();
+                return Unauthorized(new { message = "Invalid email or password" });
             }
 
             var token = _jwtTokenService.GenerateToken(user);
