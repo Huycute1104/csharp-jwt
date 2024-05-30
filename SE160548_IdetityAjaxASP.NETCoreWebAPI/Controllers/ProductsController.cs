@@ -31,7 +31,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
             Desc
         }
         [HttpGet]
-        public IActionResult GetAllProduct(
+        public IActionResult GetProduct(
     [FromQuery] int pageIndex = 1,
     [FromQuery] int pageSize = 10,
     [FromQuery] string? searchProductName = null,
@@ -90,7 +90,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
                 Product product = unitOfwork.ProductRepo.GetById(id);
                 if (product == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = "Product Not Found" });
                 }
                 return Ok(product);
             }
@@ -130,7 +130,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
                 Product product = unitOfwork.ProductRepo.GetById(id);
                 if (product == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = "Product Not Found" });
                 }
                 unitOfwork.ProductRepo.Delete(product);
                 return Ok();
@@ -148,7 +148,7 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.Controllers
                 Product product = unitOfwork.ProductRepo.GetById(id);
                 if (product == null)
                 {
-                    return NotFound();
+                    return NotFound(new { message = "Product Not Found" });
                 }
                 product.UnitPrice = model.UnitPrice;
                 product.CategoryId = model.CategoryId;
