@@ -32,7 +32,8 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.DependencyInjection
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", true, true)
                 .Build();
-            var str = config["ConnectionStrings:MyDB"];
+            /*var str = config["ConnectionStrings:MyDB"];*/
+            var str = config["ConnectionStrings:DefaultConnection"];
             return str;
         }
     }
