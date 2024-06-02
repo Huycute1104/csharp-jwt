@@ -1,6 +1,9 @@
+using AutoMapper.Execution;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SE160548_IdetityAjaxASP.NETCoreWebAPI.DependencyInjection;
+using SE160548_IdetityAjaxASP.NETCoreWebAPI.Helper;
+using SE160548_IdetityAjaxASP.NETCoreWebAPI.Models;
 using SE160548_IdetityAjaxASP.NETCoreWebAPI.Service;
 using SE160548_IdetityAjaxASP.NETCoreWebAPI.Services;
 using System.Text;
@@ -16,7 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDatabase();
 builder.Services.addUnitOfWork();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
-
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 // Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);

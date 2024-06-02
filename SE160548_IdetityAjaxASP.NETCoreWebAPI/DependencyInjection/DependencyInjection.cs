@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository.Models;
 using SE160548_IdetityAjaxASP.NETCoreWebAPI.Repository.UnitOfwork;
 using SE160548_IdetityAjaxASP.NETCoreWebAPI.Service;
@@ -12,13 +13,18 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.DependencyInjection
             services.AddDbContext<FStoreDBContext>(options => options.UseSqlServer(getConnection()));
             return services;
         }
+
+   /*     public static IServiceCollection AddAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper();
+            return services;
+        }*/
+
         public static IServiceCollection addUnitOfWork(this IServiceCollection services)
         {
             services.AddScoped<IUnitOfwork, UnitOfwork>();
             return services;
         }
-
-
 
         public static string getConnection()
         {
@@ -30,4 +36,5 @@ namespace SE160548_IdetityAjaxASP.NETCoreWebAPI.DependencyInjection
             return str;
         }
     }
+
 }
